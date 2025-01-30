@@ -2,10 +2,19 @@ import React from "react";
 import noMovie from "../assets/no-movie.png";
 import star from "../assets/star.svg";
 import { motion } from "motion/react";
+import { useNavigate } from "react-router";
 const Card = ({
   index,
-  movie: { title, vote_average, poster_path, release_date, original_language },
+  movie: {
+    title,
+    vote_average,
+    poster_path,
+    release_date,
+    original_language,
+    id,
+  },
 }) => {
+  const navigate = useNavigate();
   return (
     <motion.div
       whileHover={{ scale: 1.05 }}
@@ -13,9 +22,10 @@ const Card = ({
       viewport={{ once: true }}
       initial={{ opacity: 0, y: 50 }}
       transition={{ delay: index * 0.2, duration: 0.3 }}
-      className=" movie-card"
+      className=" movie-card "
     >
       <img
+        onClick={() => navigate(`/single-movie/${id}`)}
         src={
           poster_path
             ? `https://image.tmdb.org/t/p/w500${poster_path}`
